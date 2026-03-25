@@ -12,8 +12,8 @@ namespace Bao_testscripts
     [TestFixture]
     public class Tests
     {
-        private static string excelFilePath = @"D:\Nhom5_THBĐ\Report_Nhom_5.xlsx";
-        private string screenshotFolder = @"D:\Nhom5_THBĐ\Screenshots";
+        private static string excelFilePath = @"D:\GAME\Nhom-5\Report_Nhom_5.xlsx";
+        private string screenshotFolder = @"D:\GAME\Nhom-5\Screenshots";
 
         [SetUp]
         public void Setup()
@@ -23,7 +23,7 @@ namespace Bao_testscripts
 
         public static IEnumerable<TestCaseData> GetTestData()
         {
-            var sheets = new[] { "Login", "Transfer", "BillPay", "Loan", "Account" };
+            var sheets = new[] { "Loan", "Transfer", "BillPay", "FindTrans", "Account", "Login" };
             var testCases = new List<TestCaseData>();
 
             using (var stream = new FileStream(excelFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -131,6 +131,74 @@ namespace Bao_testscripts
                             Thread.Sleep(1500);
                             actualMessage = GetPageResult(driver);
                             break;
+
+
+                        case "FindTrans":
+                            // Bấm vào menu Find Transactions
+                            driver.FindElement(By.LinkText("Find Transactions")).Click();
+                            Thread.Sleep(2000); // Chờ load trang
+
+                            By inputLocator = null;
+                            By buttonLocator = null;
+
+                            // Phân loại logic tìm kiếm dựa trên TestCaseID để điền đúng ô
+                            if (testCaseId == "TFIND_01" || testCaseId == "TFIND_02" || testCaseId == "TFIND_03" || testCaseId == "TFIND_09" || testCaseId == "TFIND_15")
+                            {
+                                // Tìm theo ID
+                                inputLocator = By.Id("transactionId");
+                                buttonLocator = By.Id("findById");
+                            }
+                            else if (testCaseId == "TFIND_04" || testCaseId == "TFIND_05" || testCaseId == "TFIND_06" || testCaseId == "TFIND_07" || testCaseId == "TFIND_08" || testCaseId == "TFIND_10" || testCaseId == "TFIND_16")
+                            {
+                                // Tìm theo Ngày
+                                inputLocator = By.Id("transactionDate");
+                                buttonLocator = By.Id("findByDate");
+                            }
+                            else if (testCaseId == "TFIND_13" || testCaseId == "TFIND_14" || testCaseId == "TFIND_17")
+                            {
+                                // Tìm theo Khoảng thời gian
+                                inputLocator = By.Id("fromDate");
+                                buttonLocator = By.Id("findByDateRange");
+                                // Ghi chú: Kịch bản TFIND_17 cố tình bỏ trống ô ToDate (By.Id("toDate")) nên ta không SendKeys vào nó.
+                            }
+                            else if (testCaseId == "TFIND_11" || testCaseId == "TFIND_12" || testCaseId == "TFIND_18")
+                            {
+                                // Tìm theo Số tiền
+                                inputLocator = By.Id("amount");
+                                buttonLocator = By.Id("findByAmount");
+                            }
+
+                            if (inputLocator != null)
+                            {
+                                // Dùng FindElements (số nhiều) để bẫy lỗi ẩn form
+                                var inputFields = driver.FindElements(inputLocator);
+
+                                if (inputFields.Count > 0)
+                                {
+                                    // Web có hiển thị form -> Tiến hành nhập dữ liệu
+                                    inputFields[0].Clear();
+                                    if (!string.IsNullOrEmpty(amount))
+                                    {
+                                        inputFields[0].SendKeys(amount);
+                                    }
+
+                                    // Bấm nút Find tương ứng
+                                    driver.FindElement(buttonLocator).Click();
+                                    Thread.Sleep(2000);
+                                    actualMessage = GetPageResult(driver);
+                                }
+                                else
+                                {
+                                    // Form bị ẩn do account rỗng
+                                    actualMessage = "Lỗi UI ParaBank: Form tìm kiếm bị ẩn (Không tìm thấy " + inputLocator.ToString() + ")";
+                                }
+                            }
+                            else
+                            {
+                                actualMessage = $"Lỗi Script: Không nhận diện được TestCaseID '{testCaseId}'";
+                            }
+                            break;
+
                     }
 
                     // 3. LOGIC SO SÁNH THÔNG MINH
