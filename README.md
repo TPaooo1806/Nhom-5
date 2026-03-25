@@ -1,1 +1,1 @@
-Chạy bằng folder Nhom_5.sln
+Chạy bằng Nhom_5.sln
