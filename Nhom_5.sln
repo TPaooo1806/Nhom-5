@@ -4,7 +4,7 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".vs", ".vs", "{BDEAC35C-6A5D-943B-61C8-D138453D5CE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bao_testscripts", ".vs\Bao_testscripts\Bao_testscripts.csproj", "{AC6438BA-566D-55FC-45C6-D45FD751A7C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bao_testscripts", "Bao_testscripts\Bao_testscripts.csproj", "{743409A9-A0C6-C132-6AB1-EDC8627FA6BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,16 +12,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC6438BA-566D-55FC-45C6-D45FD751A7C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC6438BA-566D-55FC-45C6-D45FD751A7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC6438BA-566D-55FC-45C6-D45FD751A7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC6438BA-566D-55FC-45C6-D45FD751A7C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743409A9-A0C6-C132-6AB1-EDC8627FA6BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743409A9-A0C6-C132-6AB1-EDC8627FA6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743409A9-A0C6-C132-6AB1-EDC8627FA6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743409A9-A0C6-C132-6AB1-EDC8627FA6BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AC6438BA-566D-55FC-45C6-D45FD751A7C4} = {BDEAC35C-6A5D-943B-61C8-D138453D5CE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84133CCA-4C49-4778-87D8-0A95483E81E1}
